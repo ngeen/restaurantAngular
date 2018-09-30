@@ -1,24 +1,29 @@
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import {ExtraOptions, RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
 import {AuthGuard} from "./auth-guard.service";
-import {NbLoginModule} from "./login/login.module";
-import {NbAuthComponent} from "@nebular/auth";
+import {NbAuthComponent, NbLogoutComponent} from "@nebular/auth";
 
 const routes: Routes = [
-  { path: 'pages', canActivate: [AuthGuard], loadChildren: 'app/pages/pages.module#PagesModule' },
+  {path: 'pages', canActivate: [AuthGuard], loadChildren: 'app/pages/pages.module#PagesModule'},
   //{ path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
-  {path: 'auth',
-  component: NbAuthComponent,
-  children: [
   {
-    path: '',
-    loadChildren : './login/login.module#NbLoginModule',
+    path: 'auth',
+    component: NbAuthComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: './login/login.module#NbLoginModule',
+      },
+      {
+        path: 'login',
+        loadChildren: './login/login.module#NbLoginModule',
+      },
+      {
+        path: 'logout',
+        component: NbLogoutComponent,
+      },
+    ]
   },
-  {
-    path: 'login',
-    loadChildren : './login/login.module#NbLoginModule',
-  },
-  ]},
   // {
   //   path: 'auth',
   //   component: NbAuthComponent,
@@ -49,8 +54,8 @@ const routes: Routes = [
   //     },
   //   ],
   // },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  {path: '', redirectTo: 'pages', pathMatch: 'full'},
+  {path: '**', redirectTo: 'pages'},
 ];
 
 const config: ExtraOptions = {

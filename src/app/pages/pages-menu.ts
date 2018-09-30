@@ -2,10 +2,32 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
+    title: 'Menu',
+    group: true,
+  },
+  {
+    title: 'Menu Tanımlama',
+    icon: 'nb-e-commerce',
+    link: '/pages/dashboard',
+    home: true,
+  },
+  {
+    title: 'İşletme Tanımlama',
+    icon: 'nb-layout-centre',
+    link: '/pages/dashboard',
+    home: true,
+  },
+
+  /*{
     title: 'E-commerce',
     icon: 'nb-e-commerce',
     link: '/pages/dashboard',
     home: true,
+  },
+  {
+    title: 'IoT Dashboard',
+    icon: 'nb-home',
+    link: '/pages/iot-dashboard',
   },
   {
     title: 'IoT Dashboard',
@@ -164,18 +186,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Login',
         link: '/auth/login',
       },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
     ],
-  },
+  },*/
 ];

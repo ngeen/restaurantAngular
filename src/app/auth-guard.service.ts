@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+
+import {CanActivate, Router} from "@angular/router";
+import {Injectable} from "@angular/core";
 import {tap} from "rxjs/internal/operators";
-import {NbAuthService} from "../framework/auth/services";
+import {NbAuthService} from "@nebular/auth";
+
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -14,7 +16,7 @@ export class AuthGuard implements CanActivate {
       .pipe(
         tap(authenticated => {
           if (!authenticated) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['auth/login']);
           }
         }),
       );

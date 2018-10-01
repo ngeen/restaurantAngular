@@ -16,36 +16,21 @@
 
     <div class="form-group">
       <label for="input-username" class="sr-only">Kullanıcı Adı</label>
-      <input nbInput
-             [(ngModel)]="user.username"
-             #email="ngModel"
-             name="username"
-             id="input-username"
-             placeholder="Kullanıcı Adı"
-             autofocus
-             fullWidth>
+      <input nbInput [(ngModel)]="user.username" #email="ngModel" name="username" id="input-username" placeholder="Kullanıcı Adı"
+        autofocus fullWidth>
     </div>
 
     <div class="form-group">
       <label for="input-password" class="sr-only">Şifre</label>
-      <input nbInput
-             [(ngModel)]="user.password"
-             #password="ngModel"
-             name="password"
-             type="password"
-             id="input-password"
-             placeholder="Şifre"
-             fullWidth>
+      <input nbInput [(ngModel)]="user.password" #password="ngModel" name="password" type="password" id="input-password"
+        placeholder="Şifre" fullWidth>
     </div>
 
     <div class="form-group accept-group col-sm-12">
       <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe" *ngIf="rememberMe">Beni Hatırla</nb-checkbox>
     </div>
 
-    <button nbButton
-            status="success"
-            fullWidth
-            [class.btn-pulse]="submitted">
+    <button nbButton status="success" fullWidth [class.btn-pulse]="submitted">
       Giriş
     </button>
   </form>

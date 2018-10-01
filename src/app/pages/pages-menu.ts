@@ -1,22 +1,22 @@
-import { NbMenuItem } from '@nebular/theme';
+import { NbMenuItem } from "@nebular/theme";
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Menu',
-    group: true,
+    title: "Menu",
+    group: true
   },
   {
-    title: 'Menu Tanımlama',
-    icon: 'nb-e-commerce',
-    link: '/pages/dashboard',
-    home: true,
+    title: "Menu Tanımlama",
+    icon: "nb-e-commerce",
+    link: "/pages/dashboard",
+    home: true
   },
   {
-    title: 'İşletme Tanımlama',
-    icon: 'nb-layout-centre',
-    link: '/pages/dashboard',
-    home: true,
-  },
+    title: "İşletme Tanımlama",
+    icon: "nb-layout-centre",
+    link: "/pages/venue",
+    home: true
+  }
 
   /*{
     title: 'E-commerce',

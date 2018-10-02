@@ -7,6 +7,7 @@ import { PagesRoutingModule } from "./pages-routing.module";
 import { ThemeModule } from "../@theme/theme.module";
 import { MiscellaneousModule } from "./miscellaneous/miscellaneous.module";
 import { VenueComponent } from "./venue/venue.component";
+import {ApiModule, Configuration, ConfigurationParameters} from "../@rest";
 
 const PAGES_COMPONENTS = [PagesComponent];
 
@@ -16,8 +17,8 @@ const PAGES_COMPONENTS = [PagesComponent];
     ThemeModule,
     DashboardModule,
     ECommerceModule,
-    MiscellaneousModule
+    MiscellaneousModule,
   ],
-  declarations: [...PAGES_COMPONENTS, VenueComponent]
+  declarations: [...PAGES_COMPONENTS,VenueComponent,]
 })
 export class PagesModule {}

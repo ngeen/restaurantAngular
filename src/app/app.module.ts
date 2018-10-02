@@ -15,7 +15,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ThemeModule } from "./@theme/theme.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthGuard } from "./auth-guard.service";
-import { ApiModule } from "./@rest";
+import {ApiModule, Configuration, ConfigurationParameters} from "./@rest";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,13 +24,23 @@ import { ApiModule } from "./@rest";
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    ApiModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+    ApiModule.forRoot(apiConfigFactory),
   ],
   bootstrap: [AppComponent],
   providers: [{ provide: APP_BASE_HREF, useValue: "/" }, AuthGuard]
 })
 export class AppModule {}
+
+export function apiConfigFactory () {
+  const params: ConfigurationParameters = {
+    apiKeys: {
+      Authorization: 'fiwoo'
+    }
+  };
+  return new Configuration(params);
+}
+

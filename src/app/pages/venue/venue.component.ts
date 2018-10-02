@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { VenueDTO, VenueControllerService } from "../../@rest";
+import {Component, inject, OnInit} from "@angular/core";
+import {VenueDTO, VenueControllerService, Configuration} from "../../@rest";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: "ngx-venue",
@@ -9,9 +10,11 @@ import { VenueDTO, VenueControllerService } from "../../@rest";
 export class VenueComponent implements OnInit {
   venue: VenueDTO = {};
 
-  constructor(private service: VenueControllerService) {}
+  constructor(private service: VenueControllerService, private config: Configuration) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.defaultHeaders = new HttpHeaders().set("Authorization" , String(this.config.accessToken));
+  }
 
   login() {
     this.service.newVenueUsingPOST(this.venue).subscribe(
@@ -21,6 +24,5 @@ export class VenueComponent implements OnInit {
       error => console.error(JSON.stringify(error)),
       () => console.log("done")
     );
-    console.log(this.venue);
   }
 }

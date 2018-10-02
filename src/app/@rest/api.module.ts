@@ -6,6 +6,7 @@ import { Configuration } from './configuration';
 import { RestTestService } from './api/restTest.service';
 import { UserControllerService } from './api/userController.service';
 import { VenueControllerService } from './api/venueController.service';
+import {NbAuthService} from "@nebular/auth";
 
 @NgModule({
   imports:      [ CommonModule, HttpClientModule ],
@@ -24,7 +25,7 @@ export class ApiModule {
         }
     }
 
-    constructor( @Optional() @SkipSelf() parentModule: ApiModule) {
+    constructor( @Optional() @SkipSelf() parentModule: ApiModule, protected authService: NbAuthService) {
         if (parentModule) {
             throw new Error('ApiModule is already loaded. Import your base AppModule only.');
         }

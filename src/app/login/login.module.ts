@@ -19,6 +19,7 @@ import {
 } from "@nebular/theme";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import {Configuration} from "../@rest";
 
 @NgModule({
   imports: [

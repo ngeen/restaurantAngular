@@ -29,7 +29,8 @@ export class NbLoginComponent {
     protected service: NbAuthService,
     @Inject(NB_AUTH_OPTIONS) protected options = {},
     protected cd: ChangeDetectorRef,
-    protected router: Router
+    protected router: Router,
+    private config: Configuration,
   ) {
     this.redirectDelay = this.getConfigValue("forms.login.redirectDelay");
     this.showMessages = this.getConfigValue("forms.login.showMessages");
@@ -48,7 +49,9 @@ export class NbLoginComponent {
 
         if (result.isSuccess()) {
           this.messages = result.getMessages();
-          //this.config.accessToken = result.getToken().getValue();
+          this.config.accessToken = "Bearer "+ result.getToken().getValue();
+          this.config.withCredentials = true;
+          this.config.apiKeys["Authorization"] = "Bearer "+result.getToken().getValue();
           //console.log(result.getToken().getValue());
         } else {
           this.errors = result.getErrors();

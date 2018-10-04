@@ -15,10 +15,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ThemeModule } from "./@theme/theme.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthGuard } from "./auth-guard.service";
-import {ApiModule, Configuration, ConfigurationParameters} from "./@rest";
+import { ApiModule, Configuration, ConfigurationParameters } from "./@rest";
+import { MenuListComponent } from "./menu-list/menu-list.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuListComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -28,19 +29,18 @@ import {ApiModule, Configuration, ConfigurationParameters} from "./@rest";
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
-    ApiModule.forRoot(apiConfigFactory),
+    ApiModule.forRoot(apiConfigFactory)
   ],
   bootstrap: [AppComponent],
   providers: [{ provide: APP_BASE_HREF, useValue: "/" }, AuthGuard]
 })
 export class AppModule {}
 
-export function apiConfigFactory () {
+export function apiConfigFactory() {
   const params: ConfigurationParameters = {
     apiKeys: {
-      Authorization: 'fiwoo'
+      Authorization: "fiwoo"
     }
   };
   return new Configuration(params);
 }
-

@@ -20,7 +20,8 @@ export class MenuListComponent implements OnInit {
       data => {
         console.log(data);
         this.data = data.payload;
-        this.items = this.data.filter(f => f.itemType == "CATEGORY");
+        var menu = this.data.filter(f => f.itemType == "MENU");
+        this.items = this.data.filter(f => f.itemType == "CATEGORY" && f.parentId == menu[0].id);
         console.log(this.items);
       },
       error => {

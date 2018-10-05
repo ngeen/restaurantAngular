@@ -1,6 +1,7 @@
 <nb-layout>
   <nb-layout-header fixed>
-    <img src="https://viejas.com/wp-content/uploads/2018/01/Cafe_Patio_detail-1.jpg" class="rounded" style="height: 100px; width: 100px;" alt="Menum Online Cafe"/>
+    <img src="https://viejas.com/wp-content/uploads/2018/01/Cafe_Patio_detail-1.jpg" class="rounded" style="height: 100px; width: 100px;"
+      alt="Menum Online Cafe" />
     <h1>Menum Online Cafe</h1>
   </nb-layout-header>
 
@@ -8,9 +9,9 @@
     <nb-card>
       <nb-card-body>
         <nb-actions size="small">
-          <nb-action icon="nb-home" onclick="location.reload();" ></nb-action>
+          <nb-action icon="nb-home" onclick="location.reload();"></nb-action>
           <nb-action *ngFor="let bread of breadCrumb">
-            <button nbButton size="xsmall" status="info" (click)="onSelect(bread)">{{bread.name}}</button>
+            <button nbButton size="xsmall" status="info" (click)="onSelectBread(bread)">{{bread.name}}</button>
           </nb-action>
         </nb-actions>
       </nb-card-body>

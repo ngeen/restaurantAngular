@@ -7,8 +7,7 @@ import { ItemControllerService } from "../@rest";
   styleUrls: ["./menu-list.component.scss"]
 })
 export class MenuListComponent implements OnInit {
-
-  data : any = [];
+  data: any = [];
   items: any = [];
   breadCrumb: any = [];
   selectedItem: any;
@@ -21,7 +20,9 @@ export class MenuListComponent implements OnInit {
         console.log(data);
         this.data = data.payload;
         var menu = this.data.filter(f => f.itemType == "MENU");
-        this.items = this.data.filter(f => f.itemType == "CATEGORY" && f.parentId == menu[0].id);
+        this.items = this.data.filter(
+          f => f.itemType == "CATEGORY" && f.parentId == menu[0].id
+        );
         console.log(this.items);
       },
       error => {
@@ -30,11 +31,21 @@ export class MenuListComponent implements OnInit {
     );
   }
 
-  onSelect(item: any){
-    if(item.itemType != 'PRODUCT' && item != this.selectedItem){
-      this.items = this.data.filter(f => f.parentId ==item.id);
+  onSelect(item: any) {
+    if (item.itemType != "PRODUCT" && item != this.selectedItem) {
+      this.items = this.data.filter(f => f.parentId == item.id);
       this.breadCrumb.push(item);
       this.selectedItem = item;
     }
+  }
+
+  onSelectBread(item: any) {
+    var index = this.breadCrumb.indexOf(item);
+    this.breadCrumb = this.breadCrumb.slice(0, index + 1);
+    if (item.itemType != "PRODUCT" && item != this.selectedItem) {
+      this.items = this.data.filter(f => f.parentId == item.id);
+      this.selectedItem = item;
+    }
+    console.log(this.breadCrumb);
   }
 }

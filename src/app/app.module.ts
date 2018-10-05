@@ -17,19 +17,21 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthGuard } from "./auth-guard.service";
 import { ApiModule, Configuration, ConfigurationParameters } from "./@rest";
 import { MenuListComponent } from "./menu-list/menu-list.component";
+import {MenuListModule} from "./menu-list/menu-list.module";
 
 @NgModule({
-  declarations: [AppComponent, MenuListComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
 
+    MenuListModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
-    ApiModule.forRoot(apiConfigFactory)
+    ApiModule.forRoot(apiConfigFactory),
   ],
   bootstrap: [AppComponent],
   providers: [{ provide: APP_BASE_HREF, useValue: "/" }, AuthGuard]

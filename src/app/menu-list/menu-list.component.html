@@ -5,23 +5,21 @@
   </nb-layout-header>
 
   <nb-layout-column>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data</li>
-      </ol>
-    </nav>
+    <nb-card>
+      <nb-card-body>
+        <nb-actions size="small">
+          <nb-action icon="nb-home" onclick="location.reload();" ></nb-action>
+          <nb-action *ngFor="let bread of breadCrumb">
+            <button nbButton size="xsmall" status="info" (click)="onSelect(bread)">{{bread.name}}</button>
+          </nb-action>
+        </nb-actions>
+      </nb-card-body>
+    </nb-card>
 
     <nb-card *ngFor="let item of items" (click)="onSelect(item)">
-      <nb-card-header><h2>{{item.name}}</h2></nb-card-header>
       <nb-card-body>
-        <img src="{{item.image}}"  class="rounded" style="height: 100px; width: 100px;" alt="{{item.name}}"/>
-        {{item.description}}
+        <i class="{{item.image}}"></i> {{item.name}}
       </nb-card-body>
-      <nb-card-footer>
-
-      </nb-card-footer>
     </nb-card>
 
   </nb-layout-column>

@@ -10,7 +10,9 @@ export class MenuListComponent implements OnInit {
 
   data : any = [];
   items: any = [];
-  breadCrumb
+  breadCrumb: any = [];
+  selectedItem: any;
+
   constructor(private itemService: ItemControllerService) {}
 
   ngOnInit() {
@@ -18,7 +20,7 @@ export class MenuListComponent implements OnInit {
       data => {
         console.log(data);
         this.data = data.payload;
-        this.items = this.data.filter(f => f.itemType == "MENU");
+        this.items = this.data.filter(f => f.itemType == "CATEGORY");
         console.log(this.items);
       },
       error => {
@@ -28,7 +30,10 @@ export class MenuListComponent implements OnInit {
   }
 
   onSelect(item: any){
-    if(item.itemType != 'PRODUCT')
+    if(item.itemType != 'PRODUCT' && item != this.selectedItem){
       this.items = this.data.filter(f => f.parentId ==item.id);
+      this.breadCrumb.push(item);
+      this.selectedItem = item;
+    }
   }
 }

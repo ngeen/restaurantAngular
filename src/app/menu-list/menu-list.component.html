@@ -1,8 +1,9 @@
 <nb-layout>
+
   <nb-layout-header fixed>
-    <img src="https://viejas.com/wp-content/uploads/2018/01/Cafe_Patio_detail-1.jpg" class="rounded" style="height: 100px; width: 100px;"
-      alt="Menum Online Cafe" />
-    <h1>Menum Online Cafe</h1>
+      <img src="../../assets/images/allesta.jpeg" class="rounded" style="height: 100px; width: 100px;"
+           alt="Alleste Plus" /> &nbsp;
+      <h1>Allesta Plus</h1>
   </nb-layout-header>
 
   <nb-layout-column>
@@ -18,14 +19,26 @@
     </nb-card>
 
     <nb-card *ngFor="let item of items" (click)="onSelect(item)">
-      <nb-card-body>
+      <nb-card-body *ngIf="item.itemType!=='PRODUCT'">
         <i class="{{item.image}}"></i> {{item.name}}
+      </nb-card-body>
+
+      <nb-card-body *ngIf="item.itemType==='PRODUCT'">
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+          <img class="card-img-right flex-auto d-none d-md-block" alt="{{item.name}}" style="width: 200px; height: 250px;" src="{{item.image}}" data-holder-rendered="true">
+          <div class="card-body d-flex flex-column align-items-start">
+            <h3 class="mb-0">
+              {{item.name}}
+            </h3>
+            <p class="card-text mb-auto">{{item.description}}</p>
+          </div>
+        </div>
       </nb-card-body>
     </nb-card>
 
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-    Sizde işletmenizde online menu istiyorsanız arayın &nbsp; <a href="tel:+905330862424"> +90(533) 086 24 24 </a>
+    İşletmenizde online menu istiyorsanız arayın &nbsp; <a href="tel:+905330862424"> +90(533) 086 24 24 </a>
   </nb-layout-footer>
 </nb-layout>

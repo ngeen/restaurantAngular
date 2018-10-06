@@ -17,11 +17,13 @@ export class MenuListComponent implements OnInit {
   ngOnInit() {
     this.itemService.getAllItemsUsingGET().subscribe(
       data => {
+        debugger;
         console.log(data);
         this.data = data.payload;
-        var menu = this.data.filter(f => f.itemType == "MENU");
+        var menu = this.data.filter(f => f.itemType === "MENU")[0];
+        var menuId = menu.id;
         this.items = this.data.filter(
-          f => f.itemType == "CATEGORY" && f.parentId == menu[0].id
+          f => f.itemType === "CATEGORY" && f.parentId === menuId
         );
         console.log(this.items);
       },
@@ -34,7 +36,7 @@ export class MenuListComponent implements OnInit {
   onSelect(item: any) {
     debugger;
     if (item.itemType !== "PRODUCT" && item !== this.selectedItem) {
-      this.items = this.data.filter(f => f.parentId == item.id);
+      this.items = this.data.filter(f => f.parentId === item.id);
       this.breadCrumb.push(item);
       this.selectedItem = item;
     }
@@ -45,7 +47,7 @@ export class MenuListComponent implements OnInit {
     var index = this.breadCrumb.indexOf(item);
     this.breadCrumb = this.breadCrumb.slice(0, index + 1);
     if (item.itemType !== "PRODUCT" && item !== this.selectedItem) {
-      this.items = this.data.filter(f => f.parentId == item.id);
+      this.items = this.data.filter(f => f.parentId === item.id);
       this.selectedItem = item;
     }
     console.log(this.breadCrumb);
@@ -53,9 +55,10 @@ export class MenuListComponent implements OnInit {
 
   mainCategory(){
     debugger;
-    var menu = this.data.filter(f => f.itemType == "MENU");
+    var menu = this.data.filter(f => f.itemType === "MENU")[0];
+    var menuId = menu.id;
     this.items = this.data.filter(
-      f => f.itemType == "CATEGORY" && f.parentId == menu[0].id
+      f => f.itemType === "CATEGORY" && f.parentId === menuId
     );
     this.selectedItem = this.items;
     this.breadCrumb = [];

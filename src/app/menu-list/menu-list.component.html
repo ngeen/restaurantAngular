@@ -35,7 +35,7 @@
                 <h4 class="card-title">{{item.name}}</h4>
                 <p class="card-text">{{item.description}}</p>
                 <p class="card-text"><strong>Hazırlanma süresi : {{item.prepareTime}} dk Kalori : {{item.calories}} kcal </strong></p>
-                <a href="{{item.videoUrl}}" class="btn btn-primary">Video</a>
+                <a href="{{item.videoUrl}}" class="btn btn-primary" *ngIf="item.videoUrl !== null">Video</a>
               </div>
             </div>
           </div>

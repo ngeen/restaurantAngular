@@ -32,7 +32,8 @@ export class MenuListComponent implements OnInit {
   }
 
   onSelect(item: any) {
-    if (item.itemType != "PRODUCT" && item != this.selectedItem) {
+    debugger;
+    if (item.itemType !== "PRODUCT" && item !== this.selectedItem) {
       this.items = this.data.filter(f => f.parentId == item.id);
       this.breadCrumb.push(item);
       this.selectedItem = item;
@@ -40,9 +41,10 @@ export class MenuListComponent implements OnInit {
   }
 
   onSelectBread(item: any) {
+    debugger;
     var index = this.breadCrumb.indexOf(item);
     this.breadCrumb = this.breadCrumb.slice(0, index + 1);
-    if (item.itemType != "PRODUCT" && item != this.selectedItem) {
+    if (item.itemType !== "PRODUCT" && item !== this.selectedItem) {
       this.items = this.data.filter(f => f.parentId == item.id);
       this.selectedItem = item;
     }
@@ -50,10 +52,12 @@ export class MenuListComponent implements OnInit {
   }
 
   mainCategory(){
+    debugger;
     var menu = this.data.filter(f => f.itemType == "MENU");
     this.items = this.data.filter(
       f => f.itemType == "CATEGORY" && f.parentId == menu[0].id
     );
+    this.selectedItem = this.items;
     this.breadCrumb = [];
   }
 }

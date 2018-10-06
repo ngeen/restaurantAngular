@@ -9,7 +9,7 @@
     <nb-card>
       <nb-card-body>
         <nb-actions size="small">
-          <nb-action icon="nb-home" onclick="location.reload();"></nb-action>
+          <nb-action icon="nb-home" (click)="mainCategory()"></nb-action>
           <nb-action *ngFor="let bread of breadCrumb">
             <button nbButton size="xsmall" status="info" (click)="onSelectBread(bread)">{{bread.name}}</button>
           </nb-action>

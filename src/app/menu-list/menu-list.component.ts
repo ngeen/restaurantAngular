@@ -48,4 +48,12 @@ export class MenuListComponent implements OnInit {
     }
     console.log(this.breadCrumb);
   }
+
+  mainCategory(){
+    var menu = this.data.filter(f => f.itemType == "MENU");
+    this.items = this.data.filter(
+      f => f.itemType == "CATEGORY" && f.parentId == menu[0].id
+    );
+    this.breadCrumb = [];
+  }
 }

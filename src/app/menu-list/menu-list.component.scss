@@ -7,8 +7,19 @@
 
   /deep/ nb-layout-header {
     & > nav {
-      height: 150px !important;
+      height: 70px !important;
       background-color: black !important;
+
+      display: -webkit-flex;
+      display: flex;
+
+      -webkit-justify-content: center;
+      justify-content: center;
+
+      -webkit-align-items: center;
+      align-items: center;
+
+      width: 100%;
 
       & > h1 {
         color: white;
@@ -16,8 +27,12 @@
     }
   }
 
+  /deep/ nb-card-body {
+    padding: 0.7rem;
+  }
+
   /deep/ nb-layout-column {
-    padding: 7.25rem 0 0 0 !important;
+    padding: 2rem 0 0 0 !important;
   }
 
 }

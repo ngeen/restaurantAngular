@@ -1,9 +1,7 @@
 <nb-layout>
 
   <nb-layout-header fixed>
-      <img src="../../assets/images/allesta.jpeg" class="rounded" style="height: 100px; width: 100px;"
-           alt="Alleste Plus" /> &nbsp;
-      <h1>Allesta Plus</h1>
+        <img src="../../assets/images/allesta.jpeg" class="rounded" style="height: 50px; width: 50px;" alt="Alleste Plus" />
   </nb-layout-header>
 
   <nb-layout-column>
@@ -12,7 +10,7 @@
         <nb-actions size="small">
           <nb-action icon="nb-home" (click)="mainCategory()"></nb-action>
           <nb-action *ngFor="let bread of breadCrumb">
-            <button nbButton size="xsmall" status="info" (click)="onSelectBread(bread)">{{bread.name}}</button>
+            <button nbButton size="small" status="info" (click)="onSelectBread(bread)">{{bread.name}}</button>
           </nb-action>
         </nb-actions>
       </nb-card-body>
@@ -27,10 +25,10 @@
 
         <div class="card" style="border: 0px !important;">
           <div class="row ">
-            <div class="col-md-1">
+            <div class="col-2">
               <img src="{{item.image}}" style="width: 100%; height: 100%;">
             </div>
-            <div class="col-md-11 px-3">
+            <div class="col-10">
               <div class="card-block px-3">
                 <h4 class="card-title">{{item.name}}</h4>
                 <p class="card-text">{{item.description}}</p>
@@ -46,6 +44,6 @@
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-    İşletmenizde online menu istiyorsanız arayın &nbsp; <a href="tel:+905330862424"> +90(533) 086 24 24 </a>
+    İşletmenizde online menu istiyorsanız arayın &nbsp; <a href="tel:+905330862424"> +90 (533) 086 24 24 </a>
   </nb-layout-footer>
 </nb-layout>

@@ -16,12 +16,12 @@
       </nb-card-body>
     </nb-card>
 
-    <nb-card *ngFor="let item of items" (click)="onSelect(item)">
-      <nb-card-body *ngIf="item.itemType!=='PRODUCT'">
+    <nb-card *ngFor="let item of items | itemFilter: categoryFilter" (click)="onSelect(item)">
+      <nb-card-body >
         <i class="{{item.image}}"></i> {{item.name}}
       </nb-card-body>
 
-      <nb-card-body *ngIf="item.itemType==='PRODUCT'">
+      <!--nb-card-body *ngIf="item.itemType==='PRODUCT'">
 
         <div class="card" style="border: 0px !important;">
           <div class="row ">
@@ -30,7 +30,7 @@
             </div>
             <div class="col-10">
               <div class="card-block px-3">
-                <h4 class="card-title">{{item.name}}</h4>
+                <h4 class="card-title"></h4>
                 <p class="card-text">{{item.description}}</p>
                 <p class="card-text"><strong>Hazırlanma süresi : {{item.prepareTime}} dk Kalori : {{item.calories}} kcal </strong></p>
                 <a href="{{item.videoUrl}}" class="btn btn-primary" *ngIf="item.videoUrl !== null">Video</a>
@@ -38,8 +38,22 @@
             </div>
           </div>
         </div>
-      </nb-card-body>
+      </nb-card-body-->
     </nb-card>
+
+    <div *ngFor="let item of items | itemFilter: productFilter" >
+      <div class="media" *ngIf="item.itemType==='PRODUCT'">
+        <img class="d-flex align-self-start" src="{{item.image}}" alt="Generic placeholder image">
+        <div class="media-body pl-3">
+          <div class="price">{{item.name}}</div>
+          <div class="stats">
+            <span><i class="fas fa-mortar-pestle"></i>Hazırlanma süresi : {{item.prepareTime}} dk </span>
+            <span><i class="fas fa-poll"></i>Kalori : {{item.calories}} kcal </span>
+          </div>
+          <div class="address">{{item.description}}</div>
+        </div>
+      </div>
+    </div>
 
   </nb-layout-column>
 

@@ -11,6 +11,8 @@ export class MenuListComponent implements OnInit {
   items: any = [];
   breadCrumb: any = [];
   selectedItem: any;
+  productFilter = {itemType: 'PRODUCT'};
+  categoryFilter = {itemType: 'CATEGORY'};
 
   constructor(private itemService: ItemControllerService) {}
 

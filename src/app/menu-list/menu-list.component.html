@@ -43,7 +43,7 @@
 
     <div *ngFor="let item of items | itemFilter: productFilter" >
       <div class="media" *ngIf="item.itemType==='PRODUCT'">
-        <img class="d-flex align-self-start" src="{{item.image}}" alt="Generic placeholder image">
+        <img class="d-flex align-self-start" src="{{item.image}}">
         <div class="media-body pl-3">
           <div class="price">{{item.name}}</div>
           <div class="stats">

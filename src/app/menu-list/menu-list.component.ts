@@ -41,6 +41,7 @@ export class MenuListComponent implements OnInit {
       this.items = this.data.filter(f => f.parentId === item.id);
       this.breadCrumb.push(item);
       this.selectedItem = item;
+      window.scrollTo(0, 0);
     }
   }
 
@@ -51,6 +52,7 @@ export class MenuListComponent implements OnInit {
     if (item.itemType !== "PRODUCT" && item !== this.selectedItem) {
       this.items = this.data.filter(f => f.parentId === item.id);
       this.selectedItem = item;
+      window.scrollTo(0, 0);
     }
     console.log(this.breadCrumb);
   }
@@ -64,5 +66,6 @@ export class MenuListComponent implements OnInit {
     );
     this.selectedItem = this.items;
     this.breadCrumb = [];
+    window.scrollTo(0, 0);
   }
 }

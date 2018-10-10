@@ -13,6 +13,7 @@ export class MenuListComponent implements OnInit {
   selectedItem: any;
   productFilter = {itemType: 'PRODUCT'};
   categoryFilter = {itemType: 'CATEGORY'};
+  showDetail = false;
 
   constructor(private itemService: ItemControllerService) {}
 
@@ -42,6 +43,7 @@ export class MenuListComponent implements OnInit {
       this.breadCrumb.push(item);
       this.selectedItem = item;
       window.scrollTo(0, 0);
+      this.showDetail = false;
     }
   }
 
@@ -49,16 +51,18 @@ export class MenuListComponent implements OnInit {
     debugger;
     var index = this.breadCrumb.indexOf(item);
     this.breadCrumb = this.breadCrumb.slice(0, index + 1);
-    if (item.itemType !== "PRODUCT" && item !== this.selectedItem) {
+    this.showDetail = false;
+    //if (item.itemType !== "PRODUCT" && item !== this.selectedItem) {
       this.items = this.data.filter(f => f.parentId === item.id);
       this.selectedItem = item;
-      window.scrollTo(0, 0);
-    }
+    window.scrollTo(0, 0);
+    //}
     console.log(this.breadCrumb);
   }
 
   mainCategory(){
     debugger;
+    this.showDetail = false;
     var menu = this.data.filter(f => f.itemType === "MENU")[0];
     var menuId = menu.id;
     this.items = this.data.filter(
@@ -67,5 +71,11 @@ export class MenuListComponent implements OnInit {
     this.selectedItem = this.items;
     this.breadCrumb = [];
     window.scrollTo(0, 0);
+  }
+
+  showProductDetail(item: any){
+   this.selectedItem = item;
+   this.showDetail = true;
+   window.scrollTo(0, 0);
   }
 }

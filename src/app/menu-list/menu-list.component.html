@@ -16,42 +16,37 @@
       </nb-card-body>
     </nb-card>
 
-    <nb-card *ngFor="let item of items | itemFilter: categoryFilter" (click)="onSelect(item)">
-      <nb-card-body >
-        <i class="{{item.image}}"></i> {{item.name}}
-      </nb-card-body>
+    <ng-container *ngFor="let item of items | itemFilter: categoryFilter">
+      <nb-card (click)="onSelect(item)" *ngIf="!showDetail">
+        <nb-card-body >
+          <i class="{{item.image}}"></i> {{item.name}}
+        </nb-card-body>
+      </nb-card>
+    </ng-container>
 
-      <!--nb-card-body *ngIf="item.itemType==='PRODUCT'">
-
-        <div class="card" style="border: 0px !important;">
-          <div class="row ">
-            <div class="col-2">
-              <img src="{{item.image}}" style="width: 100%; height: 100%;">
-            </div>
-            <div class="col-10">
-              <div class="card-block px-3">
-                <h4 class="card-title"></h4>
-                <p class="card-text">{{item.description}}</p>
-                <p class="card-text"><strong>Hazırlanma süresi : {{item.prepareTime}} dk Kalori : {{item.calories}} kcal </strong></p>
-                <a href="{{item.videoUrl}}" class="btn btn-primary" *ngIf="item.videoUrl !== null">Video</a>
-              </div>
-            </div>
+    <ng-container *ngFor="let item of items | itemFilter: productFilter">
+      <div (click)="showProductDetail(item)" *ngIf="!showDetail && item.itemType==='PRODUCT'">
+        <div class="media">
+          <img class="d-flex align-self-start" src="{{item.image}}" >
+          <div class="media-body pl-3">
+            <div class="price">{{item.name}}</div>
+            <div class="address">{{item.description | slice:0:50 }} ...</div>
           </div>
         </div>
-      </nb-card-body-->
-    </nb-card>
+      </div>
+    </ng-container>
 
-    <div *ngFor="let item of items | itemFilter: productFilter" >
-      <div class="media" *ngIf="item.itemType==='PRODUCT'">
-        <img class="d-flex align-self-start" src="{{item.image}}">
-        <div class="media-body pl-3">
-          <div class="price">{{item.name}}</div>
-          <div class="stats">
-            <span><i class="fas fa-mortar-pestle"></i>Hazırlanma süresi : {{item.prepareTime}} dk </span>
-            <span><i class="fas fa-poll"></i>Kalori : {{item.calories}} kcal </span>
-          </div>
-          <div class="address">{{item.description}}</div>
-        </div>
+    <div class="card mb-3" *ngIf="showDetail">
+      <img class="card-img-top" src="{{selectedItem.image}}">
+      <div class="card-body">
+        <h5 class="card-title">{{selectedItem.name}}</h5>
+        <p class="card-text">{{selectedItem.description}}</p>
+        <p class="card-text">
+          <small class="text-muted">
+            <span><i class="fas fa-mortar-pestle"></i>Hazırlanma süresi : {{selectedItem.prepareTime}} dk </span>
+            <span><i class="fas fa-poll"></i>Kalori : {{selectedItem.calories}} kcal </span>
+          </small>
+        </p>
       </div>
     </div>
 

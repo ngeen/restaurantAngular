@@ -31,6 +31,7 @@
           <div class="media-body pl-3">
             <div class="price">{{item.name}}</div>
             <div class="address">{{item.description | slice:0:50 }} ...</div>
+            <div class="stats"><span>Fiyat : {{item.price}} ₺</span></div>
           </div>
         </div>
       </div>
@@ -39,14 +40,15 @@
     <div class="card mb-3" *ngIf="showDetail">
       <img class="card-img-top" src="{{selectedItem.image}}">
       <div class="card-body">
-        <h5 class="card-title">{{selectedItem.name}}</h5>
-        <p class="card-text">{{selectedItem.description}}</p>
+        <h3 class="card-title">{{selectedItem.name}}</h3>
+        <p class="card-text" style="color: black; font-size: 15px;">{{selectedItem.description}}</p>
         <p class="card-text">
           <small class="text-muted">
-            <span><i class="fas fa-mortar-pestle"></i>Hazırlanma süresi : {{selectedItem.prepareTime}} dk </span>
+            <span><i class="fas fa-mortar-pestle"></i>Hazırlanma süresi : {{selectedItem.prepareTime}} dk </span> <br />
             <span><i class="fas fa-poll"></i>Kalori : {{selectedItem.calories}} kcal </span>
           </small>
         </p>
+        <p style="font-size: 18px; color: #3f4fda">Fiyat : {{selectedItem.price}} ₺</p>
       </div>
     </div>
 

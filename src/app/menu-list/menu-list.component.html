@@ -40,7 +40,7 @@
     <div class="card mb-3" *ngIf="showDetail">
       <img class="card-img-top" src="{{selectedItem.image}}">
       <div class="card-body">
-        <h3 class="card-title">{{selectedItem.name}}</h3>
+        <h3 class="card-title" style="color: #4765AB;">{{selectedItem.name}}</h3>
         <p class="card-text" style="color: black; font-size: 15px;">{{selectedItem.description}}</p>
         <p class="card-text">
           <small class="text-muted">
@@ -48,7 +48,7 @@
             <span><i class="fas fa-poll"></i>Kalori : {{selectedItem.calories}} kcal </span>
           </small>
         </p>
-        <p style="font-size: 18px; color: #3f4fda">Fiyat : {{selectedItem.price}} ₺</p>
+        <p style="font-size: 18px; color: #4765AB;">Fiyat : {{selectedItem.price}} ₺</p>
       </div>
     </div>
 

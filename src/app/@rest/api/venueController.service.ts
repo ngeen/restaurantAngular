@@ -58,18 +58,100 @@ export class VenueControllerService {
 
 
     /**
-     * getVenueDetail
+     * deleteVenue
      * 
-     * @param id id
+     * @param venueDTO venueDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getVenueDetailUsingGET(id: number, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
-    public getVenueDetailUsingGET(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
-    public getVenueDetailUsingGET(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
-    public getVenueDetailUsingGET(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getVenueDetailUsingGET.');
+    public deleteVenueUsingPOST(venueDTO: VenueDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public deleteVenueUsingPOST(venueDTO: VenueDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public deleteVenueUsingPOST(venueDTO: VenueDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public deleteVenueUsingPOST(venueDTO: VenueDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (venueDTO === null || venueDTO === undefined) {
+            throw new Error('Required parameter venueDTO was null or undefined when calling deleteVenueUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<BaseResponse>(`${this.basePath}/deleteVenue`,
+            venueDTO,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * getUserVenues
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserVenuesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public getUserVenuesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public getUserVenuesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public getUserVenuesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<BaseResponse>(`${this.basePath}/getUserVenues`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * getVenueDetail
+     * 
+     * @param guid guid
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getVenueDetailUsingGET(guid: string, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public getVenueDetailUsingGET(guid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public getVenueDetailUsingGET(guid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public getVenueDetailUsingGET(guid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (guid === null || guid === undefined) {
+            throw new Error('Required parameter guid was null or undefined when calling getVenueDetailUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -87,7 +169,7 @@ export class VenueControllerService {
         let consumes: string[] = [
         ];
 
-        return this.httpClient.get<BaseResponse>(`${this.basePath}/venueDetail/${encodeURIComponent(String(id))}`,
+        return this.httpClient.get<BaseResponse>(`${this.basePath}/venueDetail/${encodeURIComponent(String(guid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

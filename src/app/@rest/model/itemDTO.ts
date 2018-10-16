@@ -11,11 +11,15 @@
  */
 
 
-export interface VenueDTO {
-    foursquareId?: string;
-    foursquareToken?: string;
-    infoScreenStatus?: number;
-    venueGuid?: string;
-    venueImage?: string;
-    venueName?: string;
+export interface ItemDTO {
+    description?: string;
+    id?: number;
+    image?: string;
+    itemGuid?: string;
+    itemType?: string;
+    name?: string;
+    orderNo?: number;
+    parentId?: number;
+    status?: string;
+    videoUrl?: string;
 }

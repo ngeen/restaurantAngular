@@ -19,6 +19,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs/Observable';
 
 import { BaseResponse } from '../model/baseResponse';
+import { ItemDTO } from '../model/itemDTO';
+import { ProductDTO } from '../model/productDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -57,6 +59,190 @@ export class ItemControllerService {
 
 
     /**
+     * createCategory
+     * 
+     * @param itemDTO itemDTO
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createCategoryUsingPOST(itemDTO: ItemDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public createCategoryUsingPOST(itemDTO: ItemDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public createCategoryUsingPOST(itemDTO: ItemDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public createCategoryUsingPOST(itemDTO: ItemDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (itemDTO === null || itemDTO === undefined) {
+            throw new Error('Required parameter itemDTO was null or undefined when calling createCategoryUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<BaseResponse>(`${this.basePath}/createCategory`,
+            itemDTO,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * createMenu
+     * 
+     * @param itemDTO itemDTO
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createMenuUsingPOST(itemDTO: ItemDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public createMenuUsingPOST(itemDTO: ItemDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public createMenuUsingPOST(itemDTO: ItemDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public createMenuUsingPOST(itemDTO: ItemDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (itemDTO === null || itemDTO === undefined) {
+            throw new Error('Required parameter itemDTO was null or undefined when calling createMenuUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<BaseResponse>(`${this.basePath}/createMenu`,
+            itemDTO,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * createProduct
+     * 
+     * @param productDTO productDTO
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createProductUsingPOST(productDTO: ProductDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public createProductUsingPOST(productDTO: ProductDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public createProductUsingPOST(productDTO: ProductDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public createProductUsingPOST(productDTO: ProductDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (productDTO === null || productDTO === undefined) {
+            throw new Error('Required parameter productDTO was null or undefined when calling createProductUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<BaseResponse>(`${this.basePath}/createProduct`,
+            productDTO,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * deleteItem
+     * 
+     * @param itemDTO itemDTO
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteItemUsingPOST(itemDTO: ItemDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public deleteItemUsingPOST(itemDTO: ItemDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public deleteItemUsingPOST(itemDTO: ItemDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public deleteItemUsingPOST(itemDTO: ItemDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (itemDTO === null || itemDTO === undefined) {
+            throw new Error('Required parameter itemDTO was null or undefined when calling deleteItemUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<BaseResponse>(`${this.basePath}/deleteItem`,
+            itemDTO,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * getAllItems
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -83,6 +269,52 @@ export class ItemControllerService {
         ];
 
         return this.httpClient.get<BaseResponse>(`${this.basePath}/getItems`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * updateItem
+     * 
+     * @param itemDTO itemDTO
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateItemUsingPOST(itemDTO: ItemDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public updateItemUsingPOST(itemDTO: ItemDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public updateItemUsingPOST(itemDTO: ItemDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public updateItemUsingPOST(itemDTO: ItemDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (itemDTO === null || itemDTO === undefined) {
+            throw new Error('Required parameter itemDTO was null or undefined when calling updateItemUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<BaseResponse>(`${this.basePath}/updateItem`,
+            itemDTO,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -17,9 +17,11 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthGuard } from "./auth-guard.service";
 import { ApiModule, Configuration, ConfigurationParameters } from "./@rest";
 import {MenuListModule} from "./menu-list/menu-list.module";
+import {ToasterModule} from "angular2-toaster";
+import {NotificationsComponent} from "./pages/components/notifications/notifications.component";
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent,],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

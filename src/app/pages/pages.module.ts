@@ -8,6 +8,9 @@ import { ThemeModule } from "../@theme/theme.module";
 import { MiscellaneousModule } from "./miscellaneous/miscellaneous.module";
 import { VenueComponent } from "./venue/venue.component";
 import {ApiModule, Configuration, ConfigurationParameters} from "../@rest";
+import {ToasterModule} from "angular2-toaster";
+import {NotificationsComponent} from "./components/notifications/notifications.component";
+import {Ng2SmartTableModule} from "ng2-smart-table";
 
 const PAGES_COMPONENTS = [PagesComponent];
 
@@ -18,7 +21,9 @@ const PAGES_COMPONENTS = [PagesComponent];
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
+    ToasterModule.forRoot(),
+    Ng2SmartTableModule,
   ],
-  declarations: [...PAGES_COMPONENTS,VenueComponent,]
+  declarations: [...PAGES_COMPONENTS, VenueComponent, NotificationsComponent,]
 })
 export class PagesModule {}

@@ -12,8 +12,8 @@
 
 
 export interface UserDTO {
-    id?: number;
     password?: string;
     roles?: Array<string>;
+    userGuid?: string;
     userName?: string;
 }

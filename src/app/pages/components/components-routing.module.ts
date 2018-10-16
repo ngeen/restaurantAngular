@@ -28,5 +28,4 @@ export class ComponentsRoutingModule { }
 export const routedComponents = [
   ComponentsComponent,
   TreeComponent,
-  NotificationsComponent,
 ];

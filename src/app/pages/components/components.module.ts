@@ -11,7 +11,6 @@ import { ComponentsRoutingModule, routedComponents } from './components-routing.
     ThemeModule,
     ComponentsRoutingModule,
     TreeModule,
-    ToasterModule.forRoot(),
   ],
   declarations: [
     ...routedComponents,

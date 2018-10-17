@@ -11,6 +11,7 @@ import {ApiModule, Configuration, ConfigurationParameters} from "../@rest";
 import {ToasterModule} from "angular2-toaster";
 import {NotificationsComponent} from "./components/notifications/notifications.component";
 import {Ng2SmartTableModule} from "ng2-smart-table";
+import { ToastrModule } from 'ng6-toastr-notifications';
 
 const PAGES_COMPONENTS = [PagesComponent];
 
@@ -23,6 +24,7 @@ const PAGES_COMPONENTS = [PagesComponent];
     MiscellaneousModule,
     ToasterModule.forRoot(),
     Ng2SmartTableModule,
+    ToastrModule.forRoot(),
   ],
   declarations: [...PAGES_COMPONENTS, VenueComponent, NotificationsComponent,]
 })

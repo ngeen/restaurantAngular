@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from "@angular/core";
 import {VenueDTO, VenueControllerService, Configuration} from "../../@rest";
 import {HttpHeaders} from "@angular/common/http";
 import {NbTokenLocalStorage, NbTokenStorage} from "@nebular/auth";
-import {BodyOutputType, Toast, ToasterConfig, ToasterService} from "angular2-toaster";
+import {ToastrManager} from "ng6-toastr-notifications";
 
 @Component({
   selector: "ngx-venue",
@@ -12,19 +12,6 @@ import {BodyOutputType, Toast, ToasterConfig, ToasterService} from "angular2-toa
 export class VenueComponent implements OnInit {
 
   venue: VenueDTO = {};
-
-  config: ToasterConfig;
-
-  position = 'toast-top-right';
-  animationType = 'fade';
-  timeout = 5000;
-  toastsLimit = 5;
-  type = 'success';
-
-  isNewestOnTop = true;
-  isHideOnClick = true;
-  isDuplicatesPrevented = false;
-  isCloseButton = true;
 
   settings = {
     add: {
@@ -69,27 +56,13 @@ export class VenueComponent implements OnInit {
 
   source : any;
 
-  constructor(private service: VenueControllerService, private nbTokenStorage: NbTokenStorage, private toasterService: ToasterService) {}
+  constructor(private service: VenueControllerService, private nbTokenStorage: NbTokenStorage, public toastr: ToastrManager) {}
 
   private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-    this.toasterService.popAsync(toast);
+    if(type === "success")
+      this.toastr.successToastr(body, title);
+    else
+      this.toastr.errorToastr(body, title);
   }
 
   ngOnInit() {

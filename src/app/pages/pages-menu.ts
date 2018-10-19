@@ -8,14 +8,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: "Menu Tanımlama",
     icon: "nb-e-commerce",
-    link: "/pages/dashboard",
-    home: true
+    link: "/pages/menu",
+    home: true,
   },
   {
     title: "İşletme Tanımlama",
     icon: "nb-layout-centre",
     link: "/pages/venue",
-    home: true
   }
 
   /*{

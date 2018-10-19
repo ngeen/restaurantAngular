@@ -6,6 +6,8 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ECommerceComponent } from "./e-commerce/e-commerce.component";
 import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component";
 import { VenueComponent } from "./venue/venue.component";
+import {MenuComponent} from "./menu/menu.component";
+import {AuthGuard} from "../auth-guard.service";
 
 const routes: Routes = [
   {
@@ -14,7 +16,13 @@ const routes: Routes = [
     children: [
       {
         path: "venue",
-        component: VenueComponent
+        component: VenueComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "menu",
+        component: MenuComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: "dashboard",
@@ -58,7 +66,7 @@ const routes: Routes = [
       },
       {
         path: "",
-        redirectTo: "dashboard",
+        redirectTo: "menu",
         pathMatch: "full"
       },
       {

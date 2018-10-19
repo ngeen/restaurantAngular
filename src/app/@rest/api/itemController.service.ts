@@ -279,6 +279,42 @@ export class ItemControllerService {
     }
 
     /**
+     * getUserItems
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserItemsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public getUserItemsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public getUserItemsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public getUserItemsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<BaseResponse>(`${this.basePath}/getUserItems`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * updateItem
      * 
      * @param itemDTO itemDTO

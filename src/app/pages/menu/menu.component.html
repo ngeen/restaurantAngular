@@ -1,0 +1,80 @@
+  <nb-card>
+    <nb-card-body>
+      <nb-actions size="small">
+        <nb-action icon="nb-home" (click)="mainCategory()"></nb-action>
+        <nb-action *ngFor="let bread of breadCrumb">
+          <button nbButton size="small" status="info" (click)="onSelectBread(bread)">{{bread.name}}</button>
+        </nb-action>
+      </nb-actions>
+    </nb-card-body>
+    <nb-card-footer>
+      <button class="btn btn-hero-info btn-demo" *ngIf="!selectedItem" (click)="describeMenu = !describeMenu">Menu ekle</button>
+      <button class="btn btn-hero-warning btn-demo" *ngIf="selectedItem" (click)="describeCategory = !describeCategory">Kategori ekle</button>
+      <button class="btn btn-hero-success btn-demo" *ngIf="selectedItem" (click)="describeProduct = !describeProduct">Ürün ekle</button>
+    </nb-card-footer>
+  </nb-card>
+
+  <nb-card *ngIf="describeMenu">
+    <nb-card-body>
+      <form (ngSubmit)="saveMenu()" #form="ngForm" autocomplete="nope" >
+
+        <div class="form-group row">
+          <label for="input-menuName" class="col-sm-3 col-form-label">Menu Adı</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.name" #menuName="ngModel" name="menuName" id="input-menuName"
+                   placeholder="Menu Adı" class="form-control" autofocus fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-menuDescription" class="col-sm-3 col-form-label">Menü Açıklaması</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.description" #menuDescription="ngModel" name="menuDescription" id="input-menuDescription"
+                   placeholder="Menü Açıklaması" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-menuImage" class="col-sm-3 col-form-label">Menu İkon</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.image" #menuImage="ngModel" name="menuImage" id="input-menuImage"
+                   placeholder="Menü İkon" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <button nbButton status="success" fullWidth>
+          Düzenle/Kaydet
+        </button>
+      </form>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card *ngIf="describeCategory">
+    <nb-card-body>
+      Kategori Düzenleme
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card *ngIf="describeProduct">
+    <nb-card-body>
+      Ürün Düzenleme
+    </nb-card-body>
+  </nb-card>
+
+  <ng-container *ngFor="let item of items">
+    <nb-card *ngIf="!showDetail" id="{{item.id}}">
+      <nb-card-body >
+        <div class="row">
+          <div class="col-8" (click)="onSelect(item)">
+            <i class="{{item.image}}"></i> {{item.name}}
+          </div>
+          <div class="col-2">
+            <button class="btn btn-success" (click)="onUpdate(item)">Düzenle</button>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-danger" (click)="onDelete(item)">Sil</button>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </ng-container>

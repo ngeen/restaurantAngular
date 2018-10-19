@@ -12,6 +12,7 @@ import {ToasterModule} from "angular2-toaster";
 import {NotificationsComponent} from "./components/notifications/notifications.component";
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import { ToastrModule } from 'ng6-toastr-notifications';
+import { MenuComponent } from './menu/menu.component';
 
 const PAGES_COMPONENTS = [PagesComponent];
 
@@ -26,6 +27,6 @@ const PAGES_COMPONENTS = [PagesComponent];
     Ng2SmartTableModule,
     ToastrModule.forRoot(),
   ],
-  declarations: [...PAGES_COMPONENTS, VenueComponent, NotificationsComponent,]
+  declarations: [...PAGES_COMPONENTS, VenueComponent, NotificationsComponent, MenuComponent,]
 })
 export class PagesModule {}

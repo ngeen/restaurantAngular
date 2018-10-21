@@ -8,61 +8,124 @@
       </nb-actions>
     </nb-card-body>
     <nb-card-footer>
-      <button class="btn btn-hero-info btn-demo" *ngIf="!selectedItem" (click)="describeMenu = !describeMenu">Menu ekle</button>
-      <button class="btn btn-hero-warning btn-demo" *ngIf="selectedItem" (click)="describeCategory = !describeCategory">Kategori ekle</button>
-      <button class="btn btn-hero-success btn-demo" *ngIf="selectedItem" (click)="describeProduct = !describeProduct">Ürün ekle</button>
+      <button class="btn btn-hero-info btn-demo" *ngIf="!selectedItem" (click)="describeProduct=false; describeMenuCategory = !describeMenuCategory">Menu ekle</button>
+      <button class="btn btn-hero-warning btn-demo" *ngIf="selectedItem" (click)="describeProduct=false; describeMenuCategory = !describeMenuCategory">Kategori ekle</button>
+      <button class="btn btn-hero-success btn-demo" *ngIf="selectedItem" (click)="describeMenuCategory=false; describeProduct = !describeProduct">Ürün ekle</button>
     </nb-card-footer>
   </nb-card>
 
-  <nb-card *ngIf="describeMenu">
+  <nb-card *ngIf="describeMenuCategory">
     <nb-card-body>
-      <form (ngSubmit)="saveMenu()" #form="ngForm" autocomplete="nope" >
+      <form (ngSubmit)="saveMenuCategory()" #itemForm="ngForm" autocomplete="nope" >
 
         <div class="form-group row">
-          <label for="input-menuName" class="col-sm-3 col-form-label">Menu Adı</label>
+          <label for="input-menuName" class="col-sm-3 col-form-label">Ad</label>
           <div class="col-sm-9">
             <input nbInput [(ngModel)]="item.name" #menuName="ngModel" name="menuName" id="input-menuName"
-                   placeholder="Menu Adı" class="form-control" autofocus fullWidth>
+                   placeholder="Ad" class="form-control" autofocus fullWidth>
           </div>
         </div>
 
         <div class="form-group row">
-          <label for="input-menuDescription" class="col-sm-3 col-form-label">Menü Açıklaması</label>
+          <label for="input-menuDescription" class="col-sm-3 col-form-label">Açıklama</label>
           <div class="col-sm-9">
             <input nbInput [(ngModel)]="item.description" #menuDescription="ngModel" name="menuDescription" id="input-menuDescription"
-                   placeholder="Menü Açıklaması" class="form-control" fullWidth>
+                   placeholder="Açıklama" class="form-control" fullWidth>
           </div>
         </div>
 
         <div class="form-group row">
-          <label for="input-menuImage" class="col-sm-3 col-form-label">Menu İkon</label>
+          <label for="input-menuImage" class="col-sm-3 col-form-label">İkon</label>
           <div class="col-sm-9">
             <input nbInput [(ngModel)]="item.image" #menuImage="ngModel" name="menuImage" id="input-menuImage"
-                   placeholder="Menü İkon" class="form-control" fullWidth>
+                   placeholder="İkon" class="form-control" fullWidth>
           </div>
         </div>
 
-        <button nbButton status="success" fullWidth>
-          Düzenle/Kaydet
+        <button type="submit" class="btn btn-success" fullWidth>
+          Kaydet
+        </button>
+
+        <button type="reset" class="btn btn-danger" (click)="onReset()" fullWidth>
+          İptal Et
         </button>
       </form>
     </nb-card-body>
   </nb-card>
 
-  <nb-card *ngIf="describeCategory">
-    <nb-card-body>
-      Kategori Düzenleme
-    </nb-card-body>
-  </nb-card>
-
   <nb-card *ngIf="describeProduct">
     <nb-card-body>
-      Ürün Düzenleme
+      <form (ngSubmit)="saveProduct()" #prodForm="ngForm" autocomplete="nope" >
+
+        <div class="form-group row">
+          <label for="input-itemName" class="col-sm-3 col-form-label">Ad</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.name" #itemName="ngModel" name="itemName" id="input-itemName"
+                   placeholder="Ad" class="form-control" autofocus fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-itemDescription" class="col-sm-3 col-form-label">Açıklama</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.description" #itemDescription="ngModel" name="itemDescription" id="input-itemDescription"
+                   placeholder="Açıklama" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-itemImage" class="col-sm-3 col-form-label">Resim</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.image" #itemImage="ngModel" name="itemImage" id="input-itemImage"
+                   placeholder="Resim" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-itemPrice" class="col-sm-3 col-form-label">Fiyat</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.price" #itemPrice="ngModel" name="itemPrice" id="input-itemPrice"
+                   placeholder="Fiyat" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-itemCalorie" class="col-sm-3 col-form-label">Kalori</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.calories" #itemCalorie="ngModel" name="itemCalorie" id="input-itemCalorie"
+                   placeholder="Kalori" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-itemPrepareTime" class="col-sm-3 col-form-label">Hazırlanma Süresi</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.prepareTime" #itemPrepareTime="ngModel" name="itemPrepareTime" id="input-itemPrepareTime"
+                   placeholder="Hazırlanma Süresi" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="input-itemVideoUrl" class="col-sm-3 col-form-label">Video Linki</label>
+          <div class="col-sm-9">
+            <input nbInput [(ngModel)]="item.videoUrl" #itemVideoUrl="ngModel" name="itemVideoUrl" id="input-itemVideoUrl"
+                   placeholder="Video Linki" class="form-control" fullWidth>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success" fullWidth>
+          Kaydet
+        </button>
+
+        <button type="reset" class="btn btn-danger" (click)="onReset()" fullWidth>
+          İptal Et
+        </button>
+      </form>
     </nb-card-body>
   </nb-card>
 
   <ng-container *ngFor="let item of items">
-    <nb-card *ngIf="!showDetail" id="{{item.id}}">
+    <nb-card *ngIf="!describeProduct && !describeMenuCategory" id="{{item.id}}">
       <nb-card-body >
         <div class="row">
           <div class="col-8" (click)="onSelect(item)">

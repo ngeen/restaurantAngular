@@ -15,8 +15,7 @@ export class MenuComponent implements OnInit {
   data: any = [];
   items: any = [];
   selectedItem: any;
-  describeMenu : boolean;
-  describeCategory: boolean;
+  describeMenuCategory : boolean;
   describeProduct: boolean;
   item: ProductDTO = {};
 
@@ -39,9 +38,9 @@ export class MenuComponent implements OnInit {
   }
 
   deActive(){
-    this.describeMenu = false;
-    this.describeCategory= false;
+    this.describeMenuCategory = false;
     this.describeProduct= false;
+    this.item = {};
   }
 
   onSelect(item){
@@ -78,14 +77,18 @@ export class MenuComponent implements OnInit {
       this.toastr.errorToastr(body, title);
   }
 
-  saveMenu(){
+  onReset(){
     this.deActive();
-    if(this.item.itemGuid == null){
+  }
+
+  saveMenuCategory(){
+    if(this.item.itemGuid == null && !this.selectedItem){
       this.itemService.createMenuUsingPOST(this.item).subscribe(data => {
           this.showToast("success","Bilgilendirme", "Menu ekleme işlemi başarılı");
           console.log(data);
           this.data.push(data.payload);
           this.items.push(data.payload);
+          this.deActive();
         },
         error => {
           this.showToast("error","Hata", "Menu ekleme işleminde hata oluştu.");
@@ -94,18 +97,73 @@ export class MenuComponent implements OnInit {
         () => {
           console.log("done")
         },);
+    } else if(this.item.itemGuid == null && this.selectedItem){
+      this.item.parentId = this.selectedItem.id;
+      this.itemService.createCategoryUsingPOST(this.item).subscribe(data => {
+          this.showToast("success","Bilgilendirme", "Kategori ekleme işlemi başarılı");
+          console.log(data);
+          this.data.push(data.payload);
+          this.items.push(data.payload);
+          this.deActive();
+        },
+        error => {
+          this.showToast("error","Hata", "kategori ekleme işleminde hata oluştu.");
+          console.error(JSON.stringify(error))
+        },
+        () => {
+          console.log("done")
+        },);
     } else {
       this.itemService.updateItemUsingPOST(this.item).subscribe(data => {
-          this.showToast("success","Bilgilendirme", "Menu düzenleme işlemi başarılı");
+          this.showToast("success","Bilgilendirme", "Düzenleme işlemi başarılı");
           var index = this.items.indexOf(this.item);
           this.items.splice(index, 1);
           var index = this.data.indexOf(this.item);
           this.data.splice(index, 1);
           this.data.push(data.payload);
           this.items.push(data.payload);
+          this.deActive();
         },
         error => {
-          this.showToast("error","Hata", "Menu düzenleme işleminde hata oluştu.");
+          this.showToast("error","Hata", "Düzenleme işleminde hata oluştu.");
+          console.error(JSON.stringify(error))
+        },
+        () => {
+          console.log("done")
+        },);
+    }
+  }
+
+  saveProduct(){
+    if(this.item.itemGuid == null) {
+      this.item.parentId = this.selectedItem.id;
+      this.itemService.createProductUsingPOST(this.item).subscribe(data => {
+          this.showToast("success","Bilgilendirme", "Ürün ekleme işlemi başarılı");
+          console.log(data);
+          this.data.push(data.payload);
+          this.items.push(data.payload);
+          this.deActive();
+        },
+        error => {
+          this.showToast("error","Hata", "Ürün ekleme işleminde hata oluştu.");
+          console.error(JSON.stringify(error))
+        },
+        () => {
+          console.log("done")
+        },);
+    } else {
+      this.itemService.updateItemUsingPOST(this.item).subscribe(data => {
+          this.showToast("success","Bilgilendirme", "Ürün düzenleme işlemi başarılı");
+          var index = this.items.indexOf(this.item);
+          this.items.splice(index, 1);
+          var index = this.data.indexOf(this.item);
+          this.data.splice(index, 1);
+          this.data.push(data.payload);
+          this.items.push(data.payload);
+          this.deActive();
+        },
+        error => {
+          this.showToast("error","Hata", "Ürün düzenleme işleminde hata oluştu.");
           console.error(JSON.stringify(error))
         },
         () => {
@@ -116,10 +174,8 @@ export class MenuComponent implements OnInit {
 
   onUpdate(item){
     this.item=item;
-    if(item.itemType === "MENU")
-      this.describeMenu = true
-    else if(item.itemType === "CATEGORY")
-      this.describeCategory = true
+    if(item.itemType === "MENU" || item.itemType === "CATEGORY")
+      this.describeMenuCategory = true
     else if(item.itemType === "PRODUCT")
       this.describeProduct = true
 

@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Configuration } from './configuration';
 
 import { ItemControllerService } from './api/itemController.service';
+import { MediaControllerService } from './api/mediaController.service';
+import { ProductExtControllerService } from './api/productExtController.service';
 import { RestTestService } from './api/restTest.service';
 import { UserControllerService } from './api/userController.service';
 import { VenueControllerService } from './api/venueController.service';
@@ -14,6 +16,8 @@ import { VenueControllerService } from './api/venueController.service';
   exports:      [],
   providers: [
     ItemControllerService,
+    MediaControllerService,
+    ProductExtControllerService,
     RestTestService,
     UserControllerService,
     VenueControllerService ]

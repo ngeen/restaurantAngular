@@ -243,6 +243,52 @@ export class ItemControllerService {
     }
 
     /**
+     * getAllItemsByGuid
+     * 
+     * @param guid guid
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllItemsByGuidUsingPOST(guid: string, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public getAllItemsByGuidUsingPOST(guid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public getAllItemsByGuidUsingPOST(guid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public getAllItemsByGuidUsingPOST(guid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (guid === null || guid === undefined) {
+            throw new Error('Required parameter guid was null or undefined when calling getAllItemsByGuidUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<BaseResponse>(`${this.basePath}/getItemsByGuid`,
+            guid,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * getAllItems
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -317,16 +363,16 @@ export class ItemControllerService {
     /**
      * updateItem
      * 
-     * @param itemDTO itemDTO
+     * @param productDTO productDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateItemUsingPOST(itemDTO: ItemDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
-    public updateItemUsingPOST(itemDTO: ItemDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
-    public updateItemUsingPOST(itemDTO: ItemDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
-    public updateItemUsingPOST(itemDTO: ItemDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (itemDTO === null || itemDTO === undefined) {
-            throw new Error('Required parameter itemDTO was null or undefined when calling updateItemUsingPOST.');
+    public updateItemUsingPOST(productDTO: ProductDTO, observe?: 'body', reportProgress?: boolean): Observable<BaseResponse>;
+    public updateItemUsingPOST(productDTO: ProductDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<BaseResponse>>;
+    public updateItemUsingPOST(productDTO: ProductDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<BaseResponse>>;
+    public updateItemUsingPOST(productDTO: ProductDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (productDTO === null || productDTO === undefined) {
+            throw new Error('Required parameter productDTO was null or undefined when calling updateItemUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -350,7 +396,7 @@ export class ItemControllerService {
         }
 
         return this.httpClient.post<BaseResponse>(`${this.basePath}/updateItem`,
-            itemDTO,
+            productDTO,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

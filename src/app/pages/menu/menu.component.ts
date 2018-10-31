@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ItemControllerService, ItemDTO, ProductDTO} from "../../@rest";
+import {ItemControllerService, ItemDTO, MediaControllerService, ProductDTO} from "../../@rest";
 import {HttpHeaders} from "@angular/common/http";
 import {NbTokenStorage} from "@nebular/auth";
 import {ToastrManager} from "ng6-toastr-notifications";
@@ -18,12 +18,16 @@ export class MenuComponent implements OnInit {
   describeMenuCategory : boolean;
   describeProduct: boolean;
   item: ProductDTO = {};
+  savedImages: any = [];
+  image: File;
 
-  constructor(private itemService : ItemControllerService, private nbTokenStorage: NbTokenStorage, public toastr: ToastrManager) { }
+  constructor(private mediaService : MediaControllerService, private itemService : ItemControllerService, private nbTokenStorage: NbTokenStorage, public toastr: ToastrManager) { }
 
   ngOnInit() {
-    var token : any = JSON.parse(this.nbTokenStorage.get().getValue());
-    this.itemService.defaultHeaders = new HttpHeaders().set("Authorization" , String('Bearer '+ token.access_token));
+    var tokens : any = JSON.parse(this.nbTokenStorage.get().toString());
+    //console.log(tokens);
+    this.itemService.defaultHeaders = new HttpHeaders().set("Authorization" , String('Bearer '+ tokens.access_token));
+    this.mediaService.defaultHeaders = new HttpHeaders().set("Authorization" , String('Bearer '+ tokens.access_token));
     this.itemService.getUserItemsUsingGET().subscribe(data => {
         console.log(data);
         this.data = data.payload;
@@ -176,8 +180,10 @@ export class MenuComponent implements OnInit {
     this.item=item;
     if(item.itemType === "MENU" || item.itemType === "CATEGORY")
       this.describeMenuCategory = true
-    else if(item.itemType === "PRODUCT")
-      this.describeProduct = true
+    else if(item.itemType === "PRODUCT"){
+      this.describeProduct = true;
+      this.savedImages = item.medias;
+    }
 
   }
 
@@ -199,6 +205,52 @@ export class MenuComponent implements OnInit {
           console.log("done")
         },);
     }
+  }
+
+  readUrl(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      this.image = event.target.files[0];
+      /*var reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent) => {
+        this.image = (<FileReader>event.target).result;
+      }
+
+      reader.readAsDataURL(event.target.files[0]);*/
+    }
+  }
+
+  addImage(itemId){
+    this.mediaService.saveMediaUsingPOST(this.image, itemId, "", "").subscribe(
+      data => {
+        this.showToast("success", "Bilgilendirme", "İmaj ekleme işlemi başarılı");
+        this.savedImages.push(data.payload);
+      },
+      error => {
+        this.showToast("error", "Hata", "İmaj ekleme işleminde hata oluştu.");
+        console.error(JSON.stringify(error))
+      },
+      () => {
+        console.log("done")
+      },
+    );
+  }
+
+  onImageDelete(media){
+    this.mediaService.deleteMediaUsingPOST(media).subscribe(
+      data => {
+        this.showToast("success", "Bilgilendirme", "İmaj silme işlemi başarılı");
+        let index = this.savedImages.findIndex( c => c.mediaGuid == media.mediaGuid);
+        this.savedImages.splice(index,1);
+      },
+      error => {
+        this.showToast("error", "Hata", "İmaj silme işleminde hata oluştu.");
+        console.error(JSON.stringify(error))
+      },
+      () => {
+        console.log("done")
+      },
+    );
   }
 
 }

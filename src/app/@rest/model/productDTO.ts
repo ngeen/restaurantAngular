@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { MediaDTO } from './mediaDTO';
 
 
 export interface ProductDTO {
@@ -18,6 +19,7 @@ export interface ProductDTO {
     image?: string;
     itemGuid?: string;
     itemType?: string;
+    medias?: Array<MediaDTO>;
     name?: string;
     orderNo?: number;
     parentId?: number;

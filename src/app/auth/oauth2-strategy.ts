@@ -218,8 +218,13 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const module = 'refresh';
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
+    const body = new HttpParams()
+      .set('refresh_token', token.getRefreshToken())
+      .set('client_id', 'web')
+      .set('client_secret', '12345')
+      .set('grant_type', this.getOption('refresh.grantType'));
 
-    return this.http.post(url, this.buildRefreshRequestData(token), this.buildAuthHeader())
+    return this.http.post(url, body, this.buildAuthHeader())
       .pipe(
         map((res) => {
           return new NbAuthResult(
@@ -307,6 +312,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       grant_type: this.getOption('refresh.grantType'),
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
+      client_id: 'web',
+      client_secret: '12345'
     };
     return this.cleanParams(this.addCredentialsToParams(params));
   }

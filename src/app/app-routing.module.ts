@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { AuthGuard } from "./auth-guard.service";
 import { NbAuthComponent, NbLogoutComponent } from "@nebular/auth";
 import { MenuListComponent } from "./menu-list/menu-list.component";
+import {NbLoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {
@@ -18,11 +19,13 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        loadChildren: "./login/login.module#NbLoginModule"
+        //loadChildren: "./login/login.module#NbLoginModule"
+        component: NbLoginComponent,
       },
       {
         path: "login",
-        loadChildren: "./login/login.module#NbLoginModule"
+        component: NbLoginComponent,
+        //loadChildren: "./login/login.module#NbLoginModule"
       },
       {
         path: "logout",

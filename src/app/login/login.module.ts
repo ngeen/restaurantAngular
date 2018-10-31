@@ -34,37 +34,6 @@ import {Configuration} from "../@rest";
       }
     ]),
 
-    NbAuthModule.forRoot({
-      forms: {
-        login: {
-          redirectDelay: 3000,
-          showMessages: {
-            error: true,
-            success: false
-          },
-          strategy: "password"
-        }
-      },
-      strategies: [
-        NbOAuth2AuthStrategy.setup(<NbOAuth2AuthStrategyOptions>{
-          name: "password",
-          clientId: "web",
-          clientSecret: "12345",
-          clientAuthMethod: NbOAuth2ClientAuthMethod.BASIC,
-          baseEndpoint: "https://restapi.oenginoz.com/oauth/",
-          token: {
-            endpoint: "token",
-            grantType: NbOAuth2GrantType.PASSWORD,
-            class: NbAuthOAuth2JWTToken,
-            requireValidToken: true
-          },
-          redirect: {
-            success: "/pages"
-          }
-        })
-      ]
-    }),
-
     NbCardModule,
     NbLayoutModule,
     NbAlertModule,
@@ -72,6 +41,6 @@ import {Configuration} from "../@rest";
     NbCheckboxModule
   ],
   declarations: [NbLoginComponent],
-  providers: [NbOAuth2AuthStrategy]
+  providers: []
 })
 export class NbLoginModule {}

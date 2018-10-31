@@ -21,7 +21,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import {Configuration} from "../@rest";
 
-@NgModule({
+/*@NgModule({
   imports: [
     CommonModule,
     FormsModule,
@@ -42,5 +42,5 @@ import {Configuration} from "../@rest";
   ],
   declarations: [NbLoginComponent],
   providers: []
-})
+})*/
 export class NbLoginModule {}
